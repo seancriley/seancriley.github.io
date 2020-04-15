@@ -10,9 +10,16 @@ header {
 	font-size: 200%;
 	margin-bottom: 20px;
 }
-footer{
-    text-align: center;
-    font-size: small;
+footer {
+	margin: auto;
+	display: block;
+	text-align: center;
+	font-size: small;
+}
+.reset {
+	margin: auto;
+	display: block;
+	text-align: center;
 }
 .trivia {
 	align-items: center;
