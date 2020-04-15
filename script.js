@@ -89,7 +89,7 @@ function apiPull() {
 			console.log(error);
 		});
 }
-// apiPull();
+apiPull();
 
 //doubling up cards
 function createDeck(array) {
@@ -138,6 +138,8 @@ function flipCard() {
 		cardCheck.length < 2 &&
 		trivia.dataset.show === '0'
 	) {
+		let id = this.getAttribute('id');
+		document.querySelector(`.front.${id}`).classList.remove('hide');
 		this.classList.add('hide');
 		cardId = this.parentNode.getAttribute('data-id');
 		cardCheck.push(cardId);
@@ -161,7 +163,7 @@ function checkForMatch() {
 		for (i = 0; i < Object.keys(cardsInPlay).length; i++) {
 			if (cardsInPlay[i].dataset.id === cardCheck[0]) {
 				backs[i].setAttribute('data-lock', 1);
-				triviaText.appendChild(document.createTextNode(cardPlayDeck[i].text));
+				triviaText.innerText = cardPlayDeck[i].text;
 				triviaImg.setAttribute('src', cardPlayDeck[i].jpg);
 			}
 		}
@@ -174,6 +176,7 @@ function checkForMatch() {
 		for (i = 0; i < Object.keys(cardsInPlay).length; i++) {
 			if (backs[i].dataset.lock === '0') {
 				backs[i].classList.remove('hide');
+				fronts[i].classList.add('hide');
 			}
 			cardCheck = [];
 			clickCount = 0;
@@ -185,6 +188,9 @@ function reset() {
 	backs.forEach(function (x) {
 		x.setAttribute('data-lock', 0);
 		x.classList.remove('hide');
+	});
+	fronts.forEach(function (x) {
+		x.classList.add('hide');
 	});
 	apiPull();
 }
