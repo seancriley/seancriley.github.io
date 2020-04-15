@@ -1,0 +1,131 @@
+.gameBoard {
+	display: grid;
+	grid-template-rows: 200px 200px 200px 200px;
+	grid-template-columns: 100px 100px 100px 100px;
+	justify-content: center;
+	grid-gap: 10px;
+}
+header {
+	text-align: center;
+	font-size: 200%;
+	margin-bottom: 20px;
+}
+footer{
+    text-align: center;
+    font-size: small;
+}
+.trivia {
+	align-items: center;
+
+	position: absolute;
+	width: 100%;
+	height: 100%;
+	left: 50%;
+	color: white;
+	background: Black;
+	border: black solid 5px;
+	transform: translate(-50%, -80%);
+	padding: 4rem;
+	text-align: center;
+	z-index: 10;
+	pointer-events: none;
+	transition: all 250ms ease;
+}
+.triviaImg {
+	height: 200px;
+	width: 300px;
+}
+.triviaText {
+	text-align: left;
+}
+
+.card {
+	display: grid;
+	border-radius: 8px;
+	width: 100px;
+	height: 200px;
+}
+
+.front {
+	border-radius: 8px;
+	width: 100px;
+	height: 200px;
+}
+.back {
+	border-radius: 8px;
+	width: 100px;
+	height: 200px;
+}
+
+.hide {
+	visibility: hidden;
+}
+
+.remove {
+	display: none;
+}
+
+.one {
+	grid-row: 1;
+	grid-column: 1;
+}
+.two {
+	grid-row: 1;
+	grid-column: 2;
+}
+.three {
+	grid-row: 1;
+	grid-column: 3;
+}
+.four {
+	grid-row: 1;
+	grid-column: 4;
+}
+.five {
+	grid-row: 2;
+	grid-column: 1;
+}
+.six {
+	grid-row: 2;
+	grid-column: 2;
+}
+.seven {
+	grid-row: 2;
+	grid-column: 3;
+}
+.eight {
+	grid-row: 2;
+	grid-column: 4;
+}
+.nine {
+	grid-row: 3;
+	grid-column: 1;
+}
+.ten {
+	grid-row: 3;
+	grid-column: 2;
+}
+.eleven {
+	grid-row: 3;
+	grid-column: 3;
+}
+.twelve {
+	grid-row: 3;
+	grid-column: 4;
+}
+.thirteen {
+	grid-row: 4;
+	grid-column: 1;
+}
+.fourteen {
+	grid-row: 4;
+	grid-column: 2;
+}
+.fifteen {
+	grid-row: 4;
+	grid-column: 3;
+}
+.sixteen {
+	grid-row: 4;
+	grid-column: 4;
+}
