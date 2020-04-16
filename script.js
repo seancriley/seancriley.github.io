@@ -57,40 +57,45 @@ const apiList = [];
 const cardPlayDeck = {};
 let cardCheck = [];
 let clickCount = 0;
-const trivia = document.querySelector('.trivia');
+const trivia = document.querySelector('#modal');
 const triviaImg = document.querySelector('.triviaImg');
 const triviaText = document.querySelector('.triviaText');
 const fronts = document.querySelectorAll('.front');
 const cardsInPlay = document.querySelectorAll('.card');
 const backs = document.querySelectorAll('.back');
 const gameBoard = document.querySelector('.gameBoard');
+const triviaButton = document.querySelector('.triviaButton');
+
+trivia.addEventListener('click', hideTrivia);
+
 
 //api pull and default feed on failure
+// console.log(trivia)
+// function apiPull() {
+// 	fetch(url)
+// 		.then((response) => response.json())
+// 		.then((response) => {
+// 			for (i = 0; i < Object.keys(response).length; i++) {
+// 				const tempObj = {
+// 					jpg: response[i].url,
+// 					text: `${response[i].explanation} copyright: ${response[i].copyright}`,
+// 					id: i,
+// 				};
 
-function apiPull() {
-	fetch(url)
-		.then((response) => response.json())
-		.then((response) => {
-			for (i = 0; i < Object.keys(response).length; i++) {
-				const tempObj = {
-					jpg: response[i].url,
-					text: `${response[i].explanation} copyright: ${response[i].copyright}`,
-					id: i,
-				};
+// 				apiList.push(tempObj);
+// 			}
 
-				apiList.push(tempObj);
-			}
+// 			createDeck(apiList);
+// 		})
+// 		.catch((error) => {
+// 			createDeck(defaultList);
+// 			alert(`Nasa APOD API has an error. Local APOD info cards will be used.`);
+// 			console.log(error);
+// 		});
+// }
+// apiPull();
 
-			createDeck(apiList);
-		})
-		.catch((error) => {
-			createDeck(defaultList);
-			alert(`Nasa APOD API has an error. Local APOD info cards will be used.`);
-			console.log(error);
-		});
-}
-apiPull();
-
+createDeck(defaultList);
 //doubling up cards
 function createDeck(array) {
 	k = 0;
@@ -120,6 +125,7 @@ function createBoard() {
 	for (i = 0; i < Object.keys(cardPlayDeck).length; i++) {
 		cardsInPlay[i].setAttribute('data-id', cardPlayDeck[i].id);
 		backs[i].addEventListener('click', flipCard);
+		fronts[i].addEventListener('click', checkForMatch);
 		backs[i].setAttribute('data-lock', 0);
 		fronts[i].setAttribute('src', cardPlayDeck[i].jpg);
 		trivia.setAttribute('data-show', 0);
@@ -128,58 +134,55 @@ function createBoard() {
 
 //flipping card over with limiters
 function flipCard() {
+	console.log(this)
 	clickCount++;
-	if (trivia.dataset.show === '1') {
-		hideTrivia();
-	}
-	if (
-		this.dataset.lock === '0' &&
-		clickCount <= 2 &&
-		cardCheck.length < 2 &&
-		trivia.dataset.show === '0'
-	) {
+	if (this.dataset.lock === '0' && cardCheck.length < 2) {
 		let id = this.getAttribute('id');
-		document.querySelector(`.front.${id}`).classList.remove('hide');
-		this.classList.add('hide');
+		document.querySelector(`.front.${id}`).classList.remove('remove');
+		this.classList.add('remove');
 		cardId = this.parentNode.getAttribute('data-id');
 		cardCheck.push(cardId);
-	}
-
-	if (cardCheck.length >= 2 && clickCount > 2) {
+	} else {
 		checkForMatch();
 	}
 }
 
 //hide trivia function
 function hideTrivia() {
-	trivia.classList.add('remove');
-	trivia.setAttribute('data-show', '0');
-	clickCount = 0;
+	if (trivia.dataset.show === '1') {
+		trivia.classList.add('remove');
+		trivia.setAttribute('data-show', '0');
+	}
 }
 
 //checking for match, locking, resetting flips
 function checkForMatch() {
+	console.log(this)
 	if (cardCheck[0] === cardCheck[1]) {
-		for (i = 0; i < Object.keys(cardsInPlay).length; i++) {
-			if (cardsInPlay[i].dataset.id === cardCheck[0]) {
-				backs[i].setAttribute('data-lock', 1);
-				triviaText.innerText = cardPlayDeck[i].text;
-				triviaImg.setAttribute('src', cardPlayDeck[i].jpg);
-			}
-		}
-		trivia.setAttribute('data-show', 1);
-		trivia.classList.remove('remove');
-
-		cardCheck = [];
-		clickCount = 0;
+		match();
 	} else {
-		for (i = 0; i < Object.keys(cardsInPlay).length; i++) {
-			if (backs[i].dataset.lock === '0') {
-				backs[i].classList.remove('hide');
-				fronts[i].classList.add('hide');
-			}
-			cardCheck = [];
-			clickCount = 0;
+		noMatch();
+	}
+	cardCheck = [];
+	clickCount = 0;
+}
+function match() {
+	for (i = 0; i < Object.keys(cardsInPlay).length; i++) {
+		if (cardsInPlay[i].dataset.id === cardCheck[0]) {
+			backs[i].setAttribute('data-lock', 1);
+			triviaText.innerText = cardPlayDeck[i].text;
+			triviaImg.setAttribute('src', cardPlayDeck[i].jpg);
+			
+		}
+	}
+	trivia.setAttribute('data-show', 1);
+	trivia.classList.remove('remove');
+}
+function noMatch() {
+	for (i = 0; i < Object.keys(cardsInPlay).length; i++) {
+		if (backs[i].dataset.lock === '0') {
+			backs[i].classList.remove('remove');
+			fronts[i].classList.add('remove');
 		}
 	}
 }
@@ -187,10 +190,10 @@ function checkForMatch() {
 function reset() {
 	backs.forEach(function (x) {
 		x.setAttribute('data-lock', 0);
-		x.classList.remove('hide');
+		x.classList.remove('remove');
 	});
 	fronts.forEach(function (x) {
-		x.classList.add('hide');
+		x.classList.add('remove');
 	});
 	apiPull();
 }

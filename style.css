@@ -21,31 +21,33 @@ footer {
 	display: block;
 	text-align: center;
 }
-.trivia {
-	align-items: center;
 
-	position: absolute;
-	width: 100%;
+#modal {
+	background-color: black;
+	position: fixed;
+	top: 0;
+	left: 0;
 	height: 100%;
-	left: 50%;
-	color: white;
-	background: Black;
-	border: black solid 5px;
-	transform: translate(-50%, -80%);
-	padding: 4rem;
-	text-align: center;
-	z-index: 10;
-	pointer-events: none;
-	transition: all 250ms ease;
+	width: 100%;
+	z-index: 3;
+	overflow: auto;
 }
+
 .triviaImg {
+	display: block;
+  margin-left: auto;
+  margin-right: auto;
+	text-align: center;
 	height: 200px;
 	width: 300px;
 }
 .triviaText {
 	text-align: left;
+	color: white;
 }
-
+.triviaButton {
+	align-items: center;
+}
 .card {
 	display: grid;
 	border-radius: 8px;
@@ -57,11 +59,14 @@ footer {
 	border-radius: 8px;
 	width: 100px;
 	height: 200px;
+	z-index: 1;
+	
 }
-.back {
+.back{
 	border-radius: 8px;
 	width: 100px;
 	height: 200px;
+	z-index: 2;
 }
 
 .hide {
