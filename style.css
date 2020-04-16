@@ -35,8 +35,8 @@ footer {
 
 .triviaImg {
 	display: block;
-  margin-left: auto;
-  margin-right: auto;
+	margin-left: auto;
+	margin-right: auto;
 	text-align: center;
 	height: 200px;
 	width: 300px;
@@ -60,9 +60,8 @@ footer {
 	width: 100px;
 	height: 200px;
 	z-index: 1;
-	
 }
-.back{
+.back {
 	border-radius: 8px;
 	width: 100px;
 	height: 200px;

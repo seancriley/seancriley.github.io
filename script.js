@@ -69,33 +69,33 @@ const triviaButton = document.querySelector('.triviaButton');
 trivia.addEventListener('click', hideTrivia);
 
 
-//api pull and default feed on failure
-// console.log(trivia)
-// function apiPull() {
-// 	fetch(url)
-// 		.then((response) => response.json())
-// 		.then((response) => {
-// 			for (i = 0; i < Object.keys(response).length; i++) {
-// 				const tempObj = {
-// 					jpg: response[i].url,
-// 					text: `${response[i].explanation} copyright: ${response[i].copyright}`,
-// 					id: i,
-// 				};
+// api pull and default feed on failure
 
-// 				apiList.push(tempObj);
-// 			}
+console.log(trivia)
+function apiPull() {
+	fetch(url)
+		.then((response) => response.json())
+		.then((response) => {
+			for (i = 0; i < Object.keys(response).length; i++) {
+				const tempObj = {
+					jpg: response[i].url,
+					text: `${response[i].explanation} copyright: ${response[i].copyright}`,
+					id: i,
+				};
 
-// 			createDeck(apiList);
-// 		})
-// 		.catch((error) => {
-// 			createDeck(defaultList);
-// 			alert(`Nasa APOD API has an error. Local APOD info cards will be used.`);
-// 			console.log(error);
-// 		});
-// }
-// apiPull();
+				apiList.push(tempObj);
+			}
 
-createDeck(defaultList);
+			createDeck(apiList);
+		})
+		.catch((error) => {
+			createDeck(defaultList);
+			alert(`Nasa APOD API has an error. Local APOD info cards will be used.`);
+			console.log(error);
+		});
+}
+apiPull();
+
 //doubling up cards
 function createDeck(array) {
 	k = 0;
