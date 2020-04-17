@@ -67,7 +67,7 @@ const gameBoard = document.querySelector('.gameBoard');
 const triviaButton = document.querySelector('.triviaButton');
 
 trivia.addEventListener('click', hideTrivia);
-
+document.querySelector('.reset').addEventListener('click', reset);
 // api pull and default feed on failure
 
 function apiPull() {
@@ -133,7 +133,6 @@ function createBoard() {
 
 //flipping card over with limiters
 function flipCard() {
-	console.log(this);
 	clickCount++;
 	if (this.dataset.lock === '0' && cardCheck.length < 2) {
 		let id = this.getAttribute('id');
@@ -156,7 +155,6 @@ function hideTrivia() {
 
 //checking for match, locking, resetting flips
 function checkForMatch() {
-	console.log(this);
 	if (cardCheck[0] === cardCheck[1]) {
 		match();
 	} else {
@@ -173,6 +171,7 @@ function match() {
 			triviaImg.setAttribute('src', cardPlayDeck[i].jpg);
 		}
 	}
+	console;
 	trivia.setAttribute('data-show', 1);
 	trivia.classList.remove('remove');
 }
@@ -187,6 +186,8 @@ function noMatch() {
 
 function reset() {
 	document.getElementById('loading').classList.remove('remove');
+	triviaText.innerText = '';
+	triviaImg.setAttribute('src', '');
 	backs.forEach(function (x) {
 		x.setAttribute('data-lock', 0);
 		x.classList.remove('remove');
@@ -194,7 +195,7 @@ function reset() {
 	fronts.forEach(function (x) {
 		x.classList.add('remove');
 	});
+	cardCheck = [];
+	clickCount = 0;
 	apiPull();
 }
-
-document.querySelector('.reset').addEventListener('click', reset);

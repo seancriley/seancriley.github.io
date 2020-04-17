@@ -17,18 +17,21 @@ header {
 	color: white;
 	border: solid;
 	width: 440px;
+	border-radius: 10px;
 }
 footer {
 	text-align: center;
 	font-size: small;
 }
 .reset {
+	font-weight: 800;
 	margin: auto;
 	margin-bottom: 10px;
 	display: block;
 	text-align: center;
 	background-color: black;
 	color: white;
+	border-radius: 10px;
 }
 
 #loading {
@@ -60,8 +63,8 @@ footer {
 	margin-left: auto;
 	margin-right: auto;
 	text-align: center;
-	height: 200px;
-	width: 300px;
+	max-height: 400px;
+	width: auto;
 }
 .triviaText {
 	text-align: left;
@@ -72,7 +75,7 @@ footer {
 }
 .card {
 	display: grid;
-	border-radius: 8px;
+	border-radius: 10px;
 	width: 100px;
 	height: 200px;
 }
