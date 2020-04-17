@@ -120,13 +120,14 @@ function randomArray(array) {
 }
 //setting of defaults
 function createBoard() {
+	trivia.setAttribute('data-show', 0);
+	document.getElementById('loading').classList.add('remove');
 	for (i = 0; i < Object.keys(cardPlayDeck).length; i++) {
 		cardsInPlay[i].setAttribute('data-id', cardPlayDeck[i].id);
 		backs[i].addEventListener('click', flipCard);
 		fronts[i].addEventListener('click', checkForMatch);
 		backs[i].setAttribute('data-lock', 0);
 		fronts[i].setAttribute('src', cardPlayDeck[i].jpg);
-		trivia.setAttribute('data-show', 0);
 	}
 }
 
@@ -185,6 +186,7 @@ function noMatch() {
 }
 
 function reset() {
+	document.getElementById('loading').classList.remove('remove');
 	backs.forEach(function (x) {
 		x.setAttribute('data-lock', 0);
 		x.classList.remove('remove');
