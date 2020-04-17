@@ -68,10 +68,8 @@ const triviaButton = document.querySelector('.triviaButton');
 
 trivia.addEventListener('click', hideTrivia);
 
-
 // api pull and default feed on failure
 
-console.log(trivia)
 function apiPull() {
 	fetch(url)
 		.then((response) => response.json())
@@ -134,7 +132,7 @@ function createBoard() {
 
 //flipping card over with limiters
 function flipCard() {
-	console.log(this)
+	console.log(this);
 	clickCount++;
 	if (this.dataset.lock === '0' && cardCheck.length < 2) {
 		let id = this.getAttribute('id');
@@ -157,7 +155,7 @@ function hideTrivia() {
 
 //checking for match, locking, resetting flips
 function checkForMatch() {
-	console.log(this)
+	console.log(this);
 	if (cardCheck[0] === cardCheck[1]) {
 		match();
 	} else {
@@ -172,7 +170,6 @@ function match() {
 			backs[i].setAttribute('data-lock', 1);
 			triviaText.innerText = cardPlayDeck[i].text;
 			triviaImg.setAttribute('src', cardPlayDeck[i].jpg);
-			
 		}
 	}
 	trivia.setAttribute('data-show', 1);
