@@ -5,21 +5,30 @@
 	justify-content: center;
 	grid-gap: 10px;
 }
+body {
+	background-image: url(./img/wp3284832.gif);
+}
 header {
+	margin: auto;
+	display: block;
 	text-align: center;
 	font-size: 200%;
 	margin-bottom: 20px;
+	color: white;
+	border: solid;
+	width: 440px;
 }
 footer {
-	margin: auto;
-	display: block;
 	text-align: center;
 	font-size: small;
 }
 .reset {
 	margin: auto;
+	margin-bottom: 10px;
 	display: block;
 	text-align: center;
+	background-color: black;
+	color: white;
 }
 
 #modal {
